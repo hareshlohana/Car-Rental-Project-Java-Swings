@@ -46,7 +46,7 @@ public class CustomerPanelUI {
 
         addCustomerButton.addActionListener(e->{
             jFrame.dispose();
-            new AddCustomerUI();
+            new AddCustomerUI(jt.getSelectedRow());
         });
 
         searchTF.addKeyListener(new KeyListener() {
@@ -72,6 +72,17 @@ public class CustomerPanelUI {
               if (jt.getSelectedRow() > -1){
                   CustomerDAO.deleteByIndex(jt.getSelectedRow());
                   dtm.removeRow(jt.getSelectedRow());
+              }else{
+                  JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
+              }
+          });
+
+          editCustomerButton.addActionListener(e->{
+              if (jt.getSelectedRow() > -1){
+                  jFrame.dispose();
+                  new AddCustomerUI(jt.getSelectedRow());
+              }else{
+                  JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
               }
           });
 

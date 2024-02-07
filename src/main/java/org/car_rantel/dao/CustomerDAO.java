@@ -100,4 +100,14 @@ public class CustomerDAO extends BaseDAO implements ICrud<Customer>{
             throw new RuntimeException(e);
         }
     }
+
+    public static Customer getByIndex(Integer index) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("WITH IndexedRows AS (SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS row_num FROM customer) SELECT * FROM IndexedRows WHERE row_num = "+index+"");
+            ResultSet rs = ps.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

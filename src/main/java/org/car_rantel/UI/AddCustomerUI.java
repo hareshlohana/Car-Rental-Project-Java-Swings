@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class AddCustomerUI {
     private final CustomerService customerService = new CustomerService();
-    public AddCustomerUI(){
+    public AddCustomerUI(Integer index){
         JFrame frame = new JFrame("ADD CUSTOMER ");
         frame.setLayout(new GridLayout(6,4,10,10));
 
@@ -27,6 +27,15 @@ public class AddCustomerUI {
 
         JLabel refLb = new JLabel("REF_NUMBER");
         JTextField refTf = new JTextField(20);
+
+        if (index != null && index > -1){
+            Customer customer = CustomerDAO.getByIndex(index);
+            nameTf.setText(customer.getName());
+            numberTf.setText(customer.getContact());
+            cnicTf.setText(customer.getCnic());
+            addressTf.setText(customer.getAddress());
+            refTf.setText(customer.getRef_number());
+        }
 
         JButton back = new JButton("BACK");
         JButton save = new JButton("SAVE");
