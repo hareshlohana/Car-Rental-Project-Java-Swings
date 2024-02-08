@@ -56,7 +56,6 @@ public class BookingPanelUI {
 
         JButton addBookingButton = new JButton("ADD");
         addBookingButton.addActionListener(e -> {
-
             jFrame.dispose();
             new AddBookingUI();
         });
@@ -76,7 +75,6 @@ public class BookingPanelUI {
 
         JButton backButton = new JButton("BACK");
         backButton.addActionListener(e -> {
-
             jFrame.dispose();
             new HomeUI();
         });
