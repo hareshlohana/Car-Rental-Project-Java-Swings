@@ -44,9 +44,17 @@ public class HomeUI {
 
         JButton userbtn = new JButton("User ");
         addUserImageOnButton(userbtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\User.png", 100,120);
+        userbtn.addActionListener(e->{
+            frame.dispose();
+            new LoginUI();
+        });
+
 
         JButton logoutbtn = new JButton("Logout ");
         addLogoutImageOnButton(logoutbtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\logout.png", 100,120);
+        logoutbtn.addActionListener(e->{
+            frame.dispose();
+        });
 
         btnPanel.add(customerbtn); btnPanel.add(vehiclebtn); btnPanel.add(vehicleOwnerbtn);
         btnPanel.add(bookingbtn); btnPanel.add(userbtn); btnPanel.add(logoutbtn);
