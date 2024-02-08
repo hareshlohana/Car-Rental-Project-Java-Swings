@@ -83,9 +83,7 @@ public class BookingDAO  extends BaseDAO implements ICrud<Booking>{
 
     public static void deleteByIndex(Integer index) {
         try {
-            PreparedStatement ps = conn.prepareStatement(DELETE_CUSTOMER_BY_ID);
-            ps.setInt(1,index);
-            ps.executeUpdate();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM booking where id ="+index+"");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -6,31 +6,26 @@ import org.car_rantel.dao.VehicleDAO;
 import org.car_rantel.domain.Customer;
 import org.car_rantel.domain.Vehicle;
 import org.car_rantel.service.BookingService;
-import org.car_rantel.service.VehicleService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookingPanelUI {
     private final BookingService bookingService = new BookingService();
-    private final VehicleService vehicleService = new VehicleService();
     VehicleDAO dao = new VehicleDAO();
     CustomerDAO cdao = new CustomerDAO();
 
     public BookingPanelUI() {
         JFrame jFrame = new JFrame("Booking Panel");
 
-        // First Panel - Display Bookings and Search
         JPanel tblAndSearchPanel = new JPanel();
         tblAndSearchPanel.setBackground(Color.GRAY);
         tblAndSearchPanel.setLayout(new BorderLayout());
 
-        // Table Display
         String[][] data = bookingService.getAllBookingForJTable();
         String[] column = {"CUSTOMER_ID", "VEHICLE_ID", "DATE", "PRICE", "STATUS"};
         DefaultTableModel dtm = new DefaultTableModel(data, column);
@@ -38,7 +33,6 @@ public class BookingPanelUI {
         JScrollPane sp = new JScrollPane(jt);
         tblAndSearchPanel.add(sp, BorderLayout.CENTER);
 
-        // Search Field
         JTextField searchTF = new JTextField(30);
         searchTF.addKeyListener(new KeyListener() {
             @Override
@@ -56,13 +50,12 @@ public class BookingPanelUI {
         });
         tblAndSearchPanel.add(searchTF, BorderLayout.NORTH);
 
-        // Buttons Panel
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(4, 1));
 
         JButton addBookingButton = new JButton("ADD");
         addBookingButton.addActionListener(e -> {
-            // Open AddBookingUI
+
             jFrame.dispose();
             new AddBookingUI();
         });
@@ -82,7 +75,7 @@ public class BookingPanelUI {
 
         JButton backButton = new JButton("BACK");
         backButton.addActionListener(e -> {
-            // Go back to HomeUI
+
             jFrame.dispose();
             new HomeUI();
         });
@@ -113,7 +106,6 @@ public class BookingPanelUI {
         JLabel bookingdateLb = new JLabel("Set Booking Date");
         JTextField bookingDateTextField = new JTextField();
 
-        // Save Button
         JButton saveButton = new JButton("SAVE");
         saveButton.addActionListener(e -> {
             try {
@@ -140,7 +132,6 @@ public class BookingPanelUI {
         addPanel.add(bookingDateTextField);
         addPanel.add(saveButton);
 
-        // Adding two panels to the frame
         jFrame.setLayout(new GridLayout(1, 2));
         jFrame.add(tblAndSearchPanel);
         jFrame.add(addPanel);

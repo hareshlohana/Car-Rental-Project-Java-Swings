@@ -91,9 +91,7 @@ public class Vehicle_OwnerDAO extends BaseDAO implements ICrud<Vehicle_Owner>{
 
     public static void deleteByIndex(Integer index) {
         try {
-            PreparedStatement ps = conn.prepareStatement(DELETE_CUSTOMER_BY_ID);
-            ps.setInt(1,index);
-            ps.executeUpdate();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM vehicle_owner where id ="+index+"");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
