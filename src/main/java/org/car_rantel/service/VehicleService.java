@@ -5,7 +5,12 @@ import org.car_rantel.dao.VehicleDAO;
 import org.car_rantel.domain.Customer;
 import org.car_rantel.domain.Vehicle;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+
+import static org.car_rantel.dao.SqlQueryConstant.Get_All_VEHICLE;
 
 public class VehicleService {
     VehicleDAO dao = new VehicleDAO();
