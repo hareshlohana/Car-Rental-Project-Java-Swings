@@ -4,6 +4,7 @@ import org.car_rantel.dao.BookingDAO;
 import org.car_rantel.dao.CustomerDAO;
 import org.car_rantel.domain.Booking;
 import org.car_rantel.domain.Customer;
+import org.car_rantel.domain.Vehicle;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -54,6 +55,17 @@ public class BookingService {
                 .booking_date(LocalDate.parse(date))
                 .price(Double.valueOf(price))
                 .booking_status(status)
+                .build();
+
+        dao.insert(booking);
+    }
+
+    public void save(Vehicle vehicle, Customer customer, String price, String date) {
+        Booking booking = Booking.builder()
+                .cid(Long.valueOf(customer.getId()))
+                .vid(Long.valueOf(vehicle.getId()))
+                .booking_date(LocalDate.parse(date))
+                .price(Double.valueOf(price))
                 .build();
 
         dao.insert(booking);

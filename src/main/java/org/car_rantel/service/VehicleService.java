@@ -62,4 +62,5 @@ public class VehicleService {
 
         dao.insert(vehicle);
     }
+
 }

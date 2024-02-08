@@ -6,6 +6,7 @@ import org.car_rantel.dao.VehicleDAO;
 import org.car_rantel.domain.Customer;
 import org.car_rantel.domain.Vehicle;
 import org.car_rantel.service.BookingService;
+import org.car_rantel.service.VehicleService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -109,14 +110,18 @@ public class BookingPanelUI {
         JButton saveButton = new JButton("SAVE");
         saveButton.addActionListener(e -> {
             try {
-                Vehicle selectedVehicle = (Vehicle) carDropdown.getSelectedItem();
-                Customer selectedCustomer = (Customer) customerDropdown.getSelectedItem();
-
-                String price = priceTextField.getText();
-                String bookingDate = bookingDateTextField.getText();
-
+                Vehicle selectedVehicle;
+                Customer selectedCustomer;
+                String price;
+                String bookingDate;
+                bookingService.save(
+                selectedVehicle = (Vehicle) carDropdown.getSelectedItem(),
+                selectedCustomer = (Customer) customerDropdown.getSelectedItem(),
+                price = priceTextField.getText(),
+                bookingDate = bookingDateTextField.getText());
                 JOptionPane.showMessageDialog(jFrame, "Booking saved successfully");
                 jFrame.dispose();
+                new HomeUI();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(jFrame, "Error saving booking: " + ex.getMessage());
             }
