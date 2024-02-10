@@ -1,6 +1,9 @@
 package org.car_rantel.UI;
 
-import org.car_rantel.service.CustomerService;
+import org.car_rantel.dao.CustomerDAO;
+import org.car_rantel.dao.Vehicle_OwnerDAO;
+import org.car_rantel.domain.Customer;
+import org.car_rantel.domain.Vehicle_Owner;
 import org.car_rantel.service.VehicleOwnerService;
 
 import javax.swing.*;
@@ -8,7 +11,7 @@ import java.awt.*;
 
 public class AddVehicleOwnerUI {
     private final VehicleOwnerService vehicleOwnerService = new VehicleOwnerService();
-    public AddVehicleOwnerUI(){
+    public AddVehicleOwnerUI(Integer index){
         JFrame frame = new JFrame("ADD VEHICLE OWNER ");
         frame.setLayout(new GridLayout(6,4,10,10));
 
@@ -26,6 +29,15 @@ public class AddVehicleOwnerUI {
 
         JLabel commissionLb = new JLabel("COMMISSION");
         JTextField commissionTf = new JTextField(20);
+
+        if (index != null && index > -1){
+            Vehicle_Owner vehicle_owner = Vehicle_OwnerDAO.getByIndex(index);
+            nameTf.setText(vehicle_owner.getOwner_name());
+            numberTf.setText(vehicle_owner.getOwner_number());
+            cnicTf.setText(vehicle_owner.getCnic());
+            addressTf.setText(vehicle_owner.getAddress());
+            commissionTf.setText(String.valueOf(vehicle_owner.getCommission()));
+        }
 
         JButton back = new JButton("BACK");
         JButton save = new JButton("SAVE");
@@ -51,11 +63,23 @@ public class AddVehicleOwnerUI {
         save.addActionListener(e->{
 
             try {
-                vehicleOwnerService.save(nameTf.getText(), numberTf.getText(),
-                        cnicTf.getText(), addressTf.getText(), commissionTf.getText());
-                frame.dispose();
-                new VehicleOwnerPanelUI();
+                if (nameTf.getText().isEmpty() || numberTf.getText().isEmpty() ||
+                        cnicTf.getText().isEmpty() || addressTf.getText().isEmpty() || commissionTf.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(frame, "Please fill Data!!");
+                    return;
+                }
 
+                if (index != null){
+                    vehicleOwnerService.updateVehicleOwner(index, nameTf.getText(), numberTf.getText(),
+                            cnicTf.getText(), addressTf.getText(), commissionTf.getText());
+                    frame.dispose();
+                    new VehicleOwnerPanelUI();
+                }else {
+                    vehicleOwnerService.save(nameTf.getText(), numberTf.getText(),
+                            cnicTf.getText(), addressTf.getText(), commissionTf.getText());
+                    frame.dispose();
+                    new VehicleOwnerPanelUI();
+                }
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(frame,"Unable to save");
             }

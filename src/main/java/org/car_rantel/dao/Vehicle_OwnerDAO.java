@@ -14,7 +14,18 @@ import static org.car_rantel.dao.SqlQueryConstant.*;
 
 public class Vehicle_OwnerDAO extends BaseDAO implements ICrud<Vehicle_Owner>{
 
-    private final VehicleOwnerMapper vehicleOwnerMapper = new VehicleOwnerMapper();
+    private static final VehicleOwnerMapper vehicleOwnerMapper = new VehicleOwnerMapper();
+
+    public static Vehicle_Owner getByIndex(int index) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("WITH IndexedRows AS (SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS row_num FROM vehicle_owner) SELECT * FROM IndexedRows WHERE row_num = "+index+"+1");
+            ResultSet rs = ps.executeQuery();
+            return vehicleOwnerMapper.resultSetToObject(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void insert(Vehicle_Owner obj) {
         try {
@@ -66,11 +77,14 @@ public class Vehicle_OwnerDAO extends BaseDAO implements ICrud<Vehicle_Owner>{
     }
 
     @Override
-    public void update(Vehicle_Owner obj, Long id) {
+    public void update(Vehicle_Owner obj,Integer index) {
         try {
-            PreparedStatement ps = conn.prepareStatement(UPDATE_VEHICLE_OWNER_BY_ID);
+            PreparedStatement ps = conn.prepareStatement("UPDATE vehicle_owner SET owner_name = ?, owner_number = ?, cnic = ?, address = ?, commission = ? where id ="+index+"+1");
             ps.setString(1,obj.getOwner_name());
-            ps.setInt(2,id.intValue());
+            ps.setString(2,obj.getOwner_number());
+            ps.setString(3,obj.getCnic());
+            ps.setString(4,obj.getAddress());
+            ps.setString(5, String.valueOf(obj.getCommission()));
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

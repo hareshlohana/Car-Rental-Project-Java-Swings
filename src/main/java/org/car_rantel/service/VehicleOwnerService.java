@@ -1,7 +1,9 @@
 package org.car_rantel.service;
 
+import org.car_rantel.dao.CustomerDAO;
 import org.car_rantel.dao.VehicleDAO;
 import org.car_rantel.dao.Vehicle_OwnerDAO;
+import org.car_rantel.domain.Customer;
 import org.car_rantel.domain.Vehicle;
 import org.car_rantel.domain.Vehicle_Owner;
 
@@ -56,5 +58,17 @@ public class VehicleOwnerService {
                 .build();
 
         dao.insert(vehicle_owner);
+    }
+
+    public void updateVehicleOwner(Integer index, String name, String contact, String cnic, String address, String commission) {
+        Vehicle_OwnerDAO vehicleOwnerDAO = new Vehicle_OwnerDAO();
+        Vehicle_Owner vehicle_owner = vehicleOwnerDAO.getByIndex(index);
+        vehicle_owner.setOwner_name(name);
+        vehicle_owner.setOwner_number(contact);
+        vehicle_owner.setCnic(cnic);
+        vehicle_owner.setAddress(address);
+        vehicle_owner.setCommission(Float.valueOf(commission));
+
+        dao.update(vehicle_owner, index);
     }
 }

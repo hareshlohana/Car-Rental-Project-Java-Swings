@@ -1,9 +1,7 @@
 package org.car_rantel.UI;
 
-import org.car_rantel.dao.CustomerDAO;
 import org.car_rantel.dao.Vehicle_OwnerDAO;
 import org.car_rantel.service.VehicleOwnerService;
-import org.car_rantel.service.VehicleService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -47,7 +45,7 @@ public class VehicleOwnerPanelUI {
 
         addVehicleOwnerButton.addActionListener(e->{
             jFrame.dispose();
-            new AddVehicleOwnerUI();
+            new AddVehicleOwnerUI(jt.getSelectedRow());
         });
 
         searchTF.addKeyListener(new KeyListener() {
@@ -73,6 +71,16 @@ public class VehicleOwnerPanelUI {
             if (jt.getSelectedRow() > -1){
                 Vehicle_OwnerDAO.deleteByIndex(jt.getSelectedRow());
                 dtm.removeRow(jt.getSelectedRow());
+            }
+        });
+
+        editVehicleOwnerButton.addActionListener(e->{
+            if (jt.getSelectedRow() > -1){
+                jFrame.dispose();
+                Vehicle_OwnerDAO.getByIndex(jt.getSelectedRow());
+                new AddVehicleOwnerUI(jt.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
             }
         });
 

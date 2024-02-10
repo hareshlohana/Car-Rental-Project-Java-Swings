@@ -47,7 +47,7 @@ public class VehiclePanelUI {
 
         addVehicleButton.addActionListener(e->{
             jFrame.dispose();
-            new AddVehicleUI();
+            new AddVehicleUI(jt.getSelectedRow());
         });
 
         searchTF.addKeyListener(new KeyListener() {
@@ -73,6 +73,16 @@ public class VehiclePanelUI {
             if (jt.getSelectedRow() > -1){
                 VehicleDAO.deleteByIndex(jt.getSelectedRow());
                 dtm.removeRow(jt.getSelectedRow());
+            }
+        });
+
+        editVehicleButton.addActionListener(e->{
+            if (jt.getSelectedRow() > -1){
+                jFrame.dispose();
+                VehicleDAO.getByIndex(jt.getSelectedRow());
+                new AddVehicleUI(jt.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
             }
         });
 

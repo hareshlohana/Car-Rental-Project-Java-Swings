@@ -67,11 +67,14 @@ public class CustomerDAO extends BaseDAO implements ICrud<Customer>{
     }
 
     @Override
-    public void update(Customer obj, Long id) {
+    public void update(Customer obj, Integer index) {
         try {
-            PreparedStatement ps = conn.prepareStatement(UPDATE_CUSTOMER_BY_ID);
+            PreparedStatement ps = conn.prepareStatement("UPDATE customer SET c_name = ?, c_number = ?, cnic = ?, address = ?, ref_number = ? where id ="+index+"+1");
             ps.setString(1,obj.getName());
-            ps.setInt(2,id.intValue());
+            ps.setString(2,obj.getContact());
+            ps.setString(3,obj.getCnic());
+            ps.setString(4,obj.getAddress());
+            ps.setString(5,obj.getRef_number());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -101,11 +104,11 @@ public class CustomerDAO extends BaseDAO implements ICrud<Customer>{
 
     public static Customer getByIndex(Integer index) {
         try {
-            PreparedStatement ps = conn.prepareStatement("WITH IndexedRows AS (SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS row_num FROM customer) SELECT * FROM IndexedRows WHERE row_num = "+index+"");
+            PreparedStatement ps = conn.prepareStatement("WITH IndexedRows AS (SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS row_num FROM customer) SELECT * FROM IndexedRows WHERE row_num = "+index+"+1");
             ResultSet rs = ps.executeQuery();
+            return customerMapper.resultSetToObject(rs);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 }

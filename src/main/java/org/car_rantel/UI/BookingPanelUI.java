@@ -6,7 +6,6 @@ import org.car_rantel.dao.VehicleDAO;
 import org.car_rantel.domain.Customer;
 import org.car_rantel.domain.Vehicle;
 import org.car_rantel.service.BookingService;
-import org.car_rantel.service.VehicleService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -57,11 +56,20 @@ public class BookingPanelUI {
         JButton addBookingButton = new JButton("ADD");
         addBookingButton.addActionListener(e -> {
             jFrame.dispose();
-            new AddBookingUI();
+            new AddBookingUI(jt.getSelectedRow());
         });
         buttonsPanel.add(addBookingButton);
 
         JButton editBookingButton = new JButton("EDIT");
+        editBookingButton.addActionListener(e->{
+            if (jt.getSelectedRow() > -1){
+                jFrame.dispose();
+                BookingDAO.getByIndex(jt.getSelectedRow());
+                new AddBookingUI(jt.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
+            }
+        });
         buttonsPanel.add(editBookingButton);
 
         JButton deleteBookingButton = new JButton("DELETE");

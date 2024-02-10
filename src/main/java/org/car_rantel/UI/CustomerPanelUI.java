@@ -80,6 +80,7 @@ public class CustomerPanelUI {
           editCustomerButton.addActionListener(e->{
               if (jt.getSelectedRow() > -1){
                   jFrame.dispose();
+                  CustomerDAO.getByIndex(jt.getSelectedRow());
                   new AddCustomerUI(jt.getSelectedRow());
               }else{
                   JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");

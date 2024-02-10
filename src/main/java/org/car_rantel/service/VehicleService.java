@@ -63,4 +63,15 @@ public class VehicleService {
         dao.insert(vehicle);
     }
 
+    public void updateVehicle(Integer index, String name, String model, String brand, String color, String owner_id) {
+        VehicleDAO vehicleDAO = new VehicleDAO();
+        Vehicle vehicle = vehicleDAO.getByIndex(index);
+        vehicle.setV_name(name);
+        vehicle.setModel(model);
+        vehicle.setBrand(brand);
+        vehicle.setColor(color);
+        vehicle.setOwner_id(Long.valueOf(owner_id));
+
+        dao.update(vehicle, index);
+    }
 }

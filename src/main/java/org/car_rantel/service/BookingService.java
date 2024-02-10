@@ -1,10 +1,11 @@
 package org.car_rantel.service;
 
 import org.car_rantel.dao.BookingDAO;
-import org.car_rantel.dao.CustomerDAO;
+import org.car_rantel.dao.Vehicle_OwnerDAO;
 import org.car_rantel.domain.Booking;
 import org.car_rantel.domain.Customer;
 import org.car_rantel.domain.Vehicle;
+import org.car_rantel.domain.Vehicle_Owner;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +20,14 @@ public class BookingService {
         String[][] data = new String[bookingList.size()][5];
         return transformToJTable(bookingList, 5);
     }
+
+    public String[][] searchByDate(String staetDate, String endDate){
+
+        List<Booking> bookingList = dao.getByDate(staetDate,endDate);
+        String[][] data = new String[bookingList.size()][5];
+        return transformToJTable(bookingList, 5);
+    }
+
     public String[][] getAllBookingForJTable(){
 
         List<Booking> bookingList = dao.getAll();
@@ -69,5 +78,17 @@ public class BookingService {
                 .build();
 
         dao.insert(booking);
+    }
+
+    public void updateBooking(Integer index, String vid, String cid, String date, String price, String status) {
+        BookingDAO bookingDAO = new BookingDAO();
+        Booking booking = bookingDAO.getByIndex(index);
+        booking.setVid(Long.valueOf(vid));
+        booking.setCid(Long.valueOf(cid));
+        booking.setBooking_date(LocalDate.parse(date));
+        booking.setPrice(Double.valueOf(price));
+        booking.getBooking_status();
+
+        dao.update(booking, index);
     }
 }

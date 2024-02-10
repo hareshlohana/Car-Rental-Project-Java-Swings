@@ -14,7 +14,18 @@ import static org.car_rantel.dao.SqlQueryConstant.*;
 
 public class BookingDAO  extends BaseDAO implements ICrud<Booking>{
 
-    private final BookingMapper bookingMapper = new BookingMapper();
+    private static final BookingMapper bookingMapper = new BookingMapper();
+
+    public static Booking getByIndex(int index) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("WITH IndexedRows AS (SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS row_num FROM booking) SELECT * FROM IndexedRows WHERE row_num = "+index+"+1");
+            ResultSet rs = ps.executeQuery();
+            return bookingMapper.resultSetToObject(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void insert(Booking obj) {
         try {
@@ -64,9 +75,29 @@ public class BookingDAO  extends BaseDAO implements ICrud<Booking>{
         }
     }
 
-    @Override
-    public void update(Booking obj, Long id) {
+    public List<Booking> getByDate(String startDate, String endDate) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM booking WHERE booking_date BETWEEN "+startDate+" AND "+endDate+"");
+            ResultSet rs = ps.executeQuery();
+            return bookingMapper.resultSetToList(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @Override
+    public void update(Booking obj, Integer index) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE booking SET vid = ?, cid = ?, booking_date = ?, price = ?, booking_status = ? where id ="+index+"+1");
+            ps.setString(1, String.valueOf(obj.getCid()));
+            ps.setString(2, String.valueOf(obj.getVid()));
+            ps.setString(3, String.valueOf(obj.getBooking_date()));
+            ps.setString(4, String.valueOf(obj.getPrice()));
+            ps.setString(5, String.valueOf(obj.getBooking_status()));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

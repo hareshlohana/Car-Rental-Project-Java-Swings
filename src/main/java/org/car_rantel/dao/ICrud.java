@@ -8,7 +8,7 @@ public interface ICrud <T> {
     void insert(T obj);
     List<T> getAll();
     T getById(Long id);
-    void update(T obj, Long id);
+    void update(T obj, Integer index);
 
     List<Customer> deleteByID(Long id);
 }

@@ -3,6 +3,7 @@ package org.car_rantel;
 import org.car_rantel.UI.CustomerPanelUI;
 import org.car_rantel.UI.HomeUI;
 import org.car_rantel.UI.LoginUI;
+import org.car_rantel.UI.MonthyReportUI;
 import org.car_rantel.dao.CustomerDAO;
 import org.car_rantel.domain.Customer;
 import org.car_rantel.mapper.CustomerMapper;
@@ -32,6 +33,5 @@ public class Main {
 
 //        LoginUI loginUI = new LoginUI();
         new HomeUI();
-
     }
 }

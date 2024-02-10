@@ -43,7 +43,7 @@ public class UserDAO extends BaseDAO implements ICrud<User>{
     }
 
     @Override
-    public void update(User obj, Long id) {
+    public void update(User obj,Integer index) {
 
     }
 

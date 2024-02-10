@@ -14,7 +14,18 @@ import static org.car_rantel.dao.SqlQueryConstant.*;
 
 public class VehicleDAO extends BaseDAO implements ICrud<Vehicle>{
 
-    private final VehicleMapper vehicleMapper = new VehicleMapper();
+    private static final VehicleMapper vehicleMapper = new VehicleMapper();
+
+    public static Vehicle getByIndex(int index) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("WITH IndexedRows AS (SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS row_num FROM vehicle) SELECT * FROM IndexedRows WHERE row_num = "+index+"+1");
+            ResultSet rs = ps.executeQuery();
+            return vehicleMapper.resultSetToObject(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void insert(Vehicle obj) {
         try {
@@ -66,11 +77,14 @@ public class VehicleDAO extends BaseDAO implements ICrud<Vehicle>{
     }
 
     @Override
-    public void update(Vehicle obj, Long id) {
+    public void update(Vehicle obj,Integer index) {
         try {
-            PreparedStatement ps = conn.prepareStatement(UPDATE_VEHICLE_BY_ID);
+            PreparedStatement ps = conn.prepareStatement("UPDATE vehicle SET v_name = ?, model = ?, brand = ?, color = ?, owner_id = ? where id ="+index+"+1");
             ps.setString(1,obj.getV_name());
-            ps.setInt(2,id.intValue());
+            ps.setString(2,obj.getModel());
+            ps.setString(3,obj.getBrand());
+            ps.setString(4,obj.getColor());
+            ps.setString(5,obj.getColor());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

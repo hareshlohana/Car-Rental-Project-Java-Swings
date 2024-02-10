@@ -58,4 +58,16 @@ public class CustomerService {
 
         dao.insert(customer);
     }
+
+    public void updateCustomer(Integer index, String name, String contact, String cnic, String address, String ref_number) {
+        CustomerDAO customerDAO = new CustomerDAO();
+        Customer customer = customerDAO.getByIndex(index);
+        customer.setName(name);
+        customer.setContact(contact);
+        customer.setCnic(cnic);
+        customer.setAddress(address);
+        customer.setRef_number(ref_number);
+
+        dao.update(customer, index);
+    }
 }

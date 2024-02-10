@@ -61,13 +61,26 @@ public class AddCustomerUI {
         save.addActionListener(e->{
 
             try {
-                customerService.save(nameTf.getText(), numberTf.getText(),
-                        cnicTf.getText(), addressTf.getText(), refTf.getText());
-                frame.dispose();
-                new CustomerPanelUI();
+                if (nameTf.getText().isEmpty() || numberTf.getText().isEmpty() ||
+                        cnicTf.getText().isEmpty() || addressTf.getText().isEmpty() || refTf.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(frame, "Please fill Data!!");
+                            return;
+                }
 
+                if (index != null){
+                    customerService.updateCustomer(index, nameTf.getText(), numberTf.getText(),
+                            cnicTf.getText(), addressTf.getText(), refTf.getText());
+                    frame.dispose();
+                    new CustomerPanelUI();
+                }else {
+                    customerService.save(nameTf.getText(), numberTf.getText(),
+                            cnicTf.getText(), addressTf.getText(), refTf.getText());
+                    frame.dispose();
+                    new CustomerPanelUI();
+                }
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(frame,"Unable to save");
+                new RuntimeException(ex);
             }
 
         });
