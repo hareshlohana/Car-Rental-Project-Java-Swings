@@ -6,8 +6,8 @@ import org.car_rantel.domain.User;
 public class AuthenticationService {
 
     private final UserDAO userDAO = new UserDAO();
-    public Boolean checkLogin(String usernmae, String password){
-        User user = userDAO.getUserByUsernameAndPassword(usernmae,password);
+    public Boolean checkLogin(String name, String password){
+        User user = userDAO.getUserByUsernameAndPassword(name,password);
         if(user != null){
             return Boolean.TRUE;
         }

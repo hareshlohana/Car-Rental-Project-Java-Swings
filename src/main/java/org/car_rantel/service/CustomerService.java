@@ -5,6 +5,9 @@ import org.car_rantel.dao.ICrud;
 import org.car_rantel.domain.Customer;
 
 import java.util.List;
+import java.util.logging.Level;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public class CustomerService {
 
@@ -48,26 +51,41 @@ public class CustomerService {
     }
 
     public void save(String name, String number, String cnic, String address, String ref_number) {
-        Customer customer = Customer.builder()
-                .name(name)
-                .contact(number)
-                .cnic(cnic)
-                .address(address)
-                .ref_number(ref_number)
-                .build();
+        try {
+            Customer customer = Customer.builder()
+                    .name(name)
+                    .contact(number)
+                    .cnic(cnic)
+                    .address(address)
+                    .ref_number(ref_number)
+                    .build();
 
-        dao.insert(customer);
+            dao.insert(customer);
+        } catch (Exception ex) {
+            throw new RuntimeException("Unable to save customer.", ex);
+        }
     }
 
     public void updateCustomer(Integer index, String name, String contact, String cnic, String address, String ref_number) {
-        CustomerDAO customerDAO = new CustomerDAO();
-        Customer customer = customerDAO.getByIndex(index);
-        customer.setName(name);
-        customer.setContact(contact);
-        customer.setCnic(cnic);
-        customer.setAddress(address);
-        customer.setRef_number(ref_number);
+        try {
+            Customer customer = dao.getByIndex(index);
+            customer.setName(name);
+            customer.setContact(contact);
+            customer.setCnic(cnic);
+            customer.setAddress(address);
+            customer.setRef_number(ref_number);
 
-        dao.update(customer, index);
+            dao.update(customer, index);
+        } catch (Exception ex) {
+            throw new RuntimeException("Unable to update customer.", ex);
+        }
+    }
+
+    public void deleteCustomer(Long id) {
+        try {
+            dao.deleteByID(id);
+        } catch (Exception ex) {
+            throw new RuntimeException("Unable to delete customer.", ex);
+        }
     }
 }

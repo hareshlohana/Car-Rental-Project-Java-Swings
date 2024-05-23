@@ -11,7 +11,7 @@ public class HomeUI {
         btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER,100,50));
 
         JButton customerbtn = new JButton("Customer ");
-        addCustomerImageOnButton(customerbtn,"C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\customer.png",100,120 );
+        addCustomerImageOnButton(customerbtn,"D:\\Idea Projects\\car_rental_db\\src\\main\\resources\\customer.png",100,120 );
 
         customerbtn.addActionListener(e-> {
             frame.dispose();
@@ -19,7 +19,7 @@ public class HomeUI {
         });
 
         JButton vehiclebtn = new JButton("Vehicle ");
-        addVehicleImageOnButton(vehiclebtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\Vehicle.jpg", 100,120);
+        addVehicleImageOnButton(vehiclebtn, "D:\\Idea Projects\\car_rental_db\\src\\main\\resources\\Vehicle.jpg", 100,120);
 
         vehiclebtn.addActionListener(e->{
             frame.dispose();
@@ -27,7 +27,7 @@ public class HomeUI {
         });
 
         JButton vehicleOwnerbtn = new JButton("Vehicle Owner ");
-        addVehicleOwnerImageOnButton(vehicleOwnerbtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\Vehicle Owner.png", 100,120);
+        addVehicleOwnerImageOnButton(vehicleOwnerbtn, "D:\\Idea Projects\\car_rental_db\\src\\main\\resources\\Vehicle Owner.png", 100,120);
 
         vehicleOwnerbtn.addActionListener(e->{
             frame.dispose();
@@ -35,7 +35,7 @@ public class HomeUI {
         });
 
         JButton bookingbtn = new JButton("Booking ");
-        addBookingImageOnButton(bookingbtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\booking.jpg", 100,120);
+        addBookingImageOnButton(bookingbtn, "D:\\Idea Projects\\car_rental_db\\src\\main\\resources\\booking.jpg", 100,120);
 
         bookingbtn.addActionListener(e->{
             frame.dispose();
@@ -43,7 +43,7 @@ public class HomeUI {
         });
 
         JButton userbtn = new JButton("User ");
-        addUserImageOnButton(userbtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\User.png", 100,120);
+        addUserImageOnButton(userbtn, "D:\\Idea Projects\\car_rental_db\\src\\main\\resources\\User.png", 100,120);
         userbtn.addActionListener(e->{
             frame.dispose();
             new LoginUI();
@@ -51,7 +51,7 @@ public class HomeUI {
 
 
         JButton logoutbtn = new JButton("Logout ");
-        addLogoutImageOnButton(logoutbtn, "C:\\Users\\Laptop\\IdeaProjects\\car_rental_db\\src\\main\\resources\\logout.png", 100,120);
+        addLogoutImageOnButton(logoutbtn, "D:\\Idea Projects\\car_rental_db\\src\\main\\resources\\logout.png", 100,120);
         logoutbtn.addActionListener(e->{
             frame.dispose();
         });

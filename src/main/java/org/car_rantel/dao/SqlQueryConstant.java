@@ -2,7 +2,7 @@ package org.car_rantel.dao;
 
 public class SqlQueryConstant {
 
-    public final static String Get_USER_BY_USERNAME_AND_PASSWORD = "select * from user where username = ? and pass = ?";
+    public final static String Get_USER_BY_USERNAME_AND_PASSWORD = "select * from user where name = ? and pass = ?";
 
 //    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

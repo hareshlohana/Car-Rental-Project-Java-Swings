@@ -58,34 +58,33 @@ public class AddCustomerUI {
             new CustomerPanelUI();
         });
 
-        save.addActionListener(e->{
-
+        save.addActionListener(e -> {
             try {
                 if (nameTf.getText().isEmpty() || numberTf.getText().isEmpty() ||
-                        cnicTf.getText().isEmpty() || addressTf.getText().isEmpty() || refTf.getText().isEmpty()){
-                            JOptionPane.showMessageDialog(frame, "Please fill Data!!");
-                            return;
+                        cnicTf.getText().isEmpty() || addressTf.getText().isEmpty() || refTf.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Please fill all fields!!");
+                    return;
                 }
 
-                if (index != null){
+                if (index != null && index >= 0) {
                     customerService.updateCustomer(index, nameTf.getText(), numberTf.getText(),
                             cnicTf.getText(), addressTf.getText(), refTf.getText());
-                    frame.dispose();
-                    new CustomerPanelUI();
-                }else {
+                } else {
                     customerService.save(nameTf.getText(), numberTf.getText(),
                             cnicTf.getText(), addressTf.getText(), refTf.getText());
-                    frame.dispose();
-                    new CustomerPanelUI();
                 }
-            }catch (Exception ex){
-                JOptionPane.showMessageDialog(frame,"Unable to save");
-                new RuntimeException(ex);
-            }
 
+                frame.dispose();
+                new CustomerPanelUI();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, "Unable to save: " + ex.getMessage());
+                ex.printStackTrace();
+            }
         });
 
+
         frame.setSize(1400,700);
+        frame.setBackground(Color.black);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

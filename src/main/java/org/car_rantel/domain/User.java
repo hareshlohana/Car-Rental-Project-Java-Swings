@@ -9,6 +9,6 @@ import lombok.*;
 @ToString
 public class User {
     private Integer id;
-    private String username;
+    private String name;
     private String password;
 }

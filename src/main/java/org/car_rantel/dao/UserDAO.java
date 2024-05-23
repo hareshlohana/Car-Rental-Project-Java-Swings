@@ -15,10 +15,10 @@ public class UserDAO extends BaseDAO implements ICrud<User>{
 
     private final UserMapper userMapper = new UserMapper();
 
-    public User getUserByUsernameAndPassword(String username, String password){
+    public User getUserByUsernameAndPassword(String name, String password){
         try {
             PreparedStatement ps = conn.prepareStatement(Get_USER_BY_USERNAME_AND_PASSWORD);
-            ps.setString(1,username);
+            ps.setString(1,name);
             ps.setString(2,password);
 
             ResultSet rs = ps.executeQuery();

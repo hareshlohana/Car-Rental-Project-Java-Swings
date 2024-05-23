@@ -32,8 +32,8 @@ public class LoginUI {
         loginbtn.addActionListener((event)->{
             if (authenticationService.checkLogin(usertf.getText(), passtf.getText())){
                     frame.dispose();
-                    new HomeUI();
-            }else{
+                new HomeUI();
+            } else {
                 JOptionPane.showMessageDialog(frame, "Invalid Username and Password");
             }
         });

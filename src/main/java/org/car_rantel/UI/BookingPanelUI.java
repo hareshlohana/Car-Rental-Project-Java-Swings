@@ -77,6 +77,8 @@ public class BookingPanelUI {
             if (jt.getSelectedRow() > -1) {
                 BookingDAO.deleteByIndex(jt.getSelectedRow());
                 dtm.removeRow(jt.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
             }
         });
         buttonsPanel.add(deleteBookingButton);

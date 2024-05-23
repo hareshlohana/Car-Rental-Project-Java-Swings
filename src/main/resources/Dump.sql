@@ -44,16 +44,27 @@ select * from vehicle;
 select * from booking;
 
 
-insert into customer(c_name,c_number,cnic,address,ref_number) values ('Jamil','03357834562','44451-5748479-2','Gulshan','03346789102');
+insert into customer(c_name,c_number,cnic,address,ref_number) values
+('Jamil','03357834562','44451-5748479-2','Gulshan','03346789102'),
+('Aamir','03357834345','44451-5748456-7','Landhi','03346782345'),
+('Yaseen','03363456072','44451-5748479-1','Nazimabad','03346789893'),
+('Tousif','03357834562','44451-5744569-2','DHA','0334678234');
 
 
-insert into vehicle_owner(owner_name,owner_number,cnic,address,commission) values ('Basim','03015617860','41043-5745589-1','Shah Faisal',1000.00),
-('Zaeem','03345678255','40353-6735479-3','Landhi',1200.00);
+insert into vehicle_owner(owner_name,owner_number,cnic,address,commission) values
+('Basim','03015617860','41043-5745589-1','Shah Faisal',1000.00),
+('Zaeem','03345678255','40353-6735479-3','Landhi',1200.00),
+('Wahab','03357834562','44451-5748469-2','Saddar','1300'),
+('Khalid','03357890062','44451-5748489-0','Garden','1200');
 
-insert into vehicle(V_name,model,brand,color,owner_id) values ('Corolla','2022','Toyota','Silver',1),
-('Civic','2023','Honda','Black',1),
-('Elentra','2024','Hundai','White',2);
+insert into vehicle(V_name,model,brand,color,owner_id) values
+('Corolla','2022','Toyota','Silver',1),
+('Civic','2023','Honda','Black',4),
+('Elentra','2024','Hundai','White',2),
+('Alto','2018','Suzuki','Golden',3);
 
-insert into booking(cid,vid,booking_date,price,booking_status) values (1,3,'2024-01-22',2500,'Booked'),
-(1,2,'2024-01-07',3000,'Booked'),
-(2,1,'2024-01-20',2300,'Available Soon');
+insert into booking(cid,vid,booking_date,price,booking_status) values
+(1,2,'2024-01-22',2500,'Booked'),
+(2,1,'2024-01-07',3000,'Booked'),
+(4,3,'2024-05-22',2800,'Available'),
+(3,4,'2024-01-20',2300,'Available');

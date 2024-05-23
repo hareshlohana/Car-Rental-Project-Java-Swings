@@ -73,6 +73,8 @@ public class VehiclePanelUI {
             if (jt.getSelectedRow() > -1){
                 VehicleDAO.deleteByIndex(jt.getSelectedRow());
                 dtm.removeRow(jt.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(jFrame, "Please Select the Row!");
             }
         });
 

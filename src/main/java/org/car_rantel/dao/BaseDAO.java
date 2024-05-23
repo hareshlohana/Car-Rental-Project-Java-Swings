@@ -6,9 +6,9 @@ import java.util.List;
 
 public class BaseDAO {
 
-    static final String dbURL = "jdbc:mysql://127.0.0.1:3306/car_rental";
+    static final String dbURL = "jdbc:mysql://127.0.0.1:3306/car_rental_db";
     static final String user = "root";
-    static final String pass = "12345678";
+    static final String pass = "root";
 
     static Connection conn;
     public BaseDAO() {

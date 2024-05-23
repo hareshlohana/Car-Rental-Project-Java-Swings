@@ -11,7 +11,7 @@ import java.util.List;
 public class UserMapper implements Imapper<User>{
 
     private static String ID = "id";
-    private static String USERNAME = "username";
+    private static String NAME = "name";
     private static String PASSWORD = "pass";
     @Override
     public List<User> resultSetToList(ResultSet rs) throws SQLException {
@@ -23,7 +23,7 @@ public class UserMapper implements Imapper<User>{
         if (rs.next()){
             return User.builder()
                     .id((int) rs.getInt(ID))
-                    .username(rs.getString(USERNAME))
+                    .name(rs.getString(NAME))
                     .password(rs.getString(PASSWORD))
                     .build();
         }

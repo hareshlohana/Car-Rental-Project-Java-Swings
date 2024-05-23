@@ -26,6 +26,7 @@ public class BookingMapper implements Imapper<Booking>{
                     .cid(Long.valueOf(rs.getString(CID)))
                     .vid(Long.valueOf(rs.getString(VID)))
                     .booking_date(LocalDate.parse(rs.getString(BOOKING_DATE)))
+                    .price(Double.valueOf(rs.getString(PRICE)))
                     .booking_status(rs.getString(BOOKING_STATUS))
                     .build();
             bookingList.add(booking);
